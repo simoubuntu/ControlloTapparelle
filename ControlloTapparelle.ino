@@ -1,5 +1,7 @@
 const int sensor1Pin = A0;
 const int sensor2Pin = A1;
+const int outUpPin = 6;
+const int outDownPin = 7;
 
 int sensor1Val = 0;
 int sensor2Val = 0;
@@ -11,6 +13,19 @@ void setup()
 {
 	Serial.begin(9600);
 	Serial.println("Serial Communication Initialized");
+
+	pinMode(outUpPin, OUTPUT);
+	pinMode(outDownPin, OUTPUT);
+
+	/**TEST LED**/ /**DISATTIVARE ASSOLUTAMENTE PRIMA DI COLLEGARE I RELE'**/
+	Serial.println("Accendo LED");
+	digitalWrite(outUpPin, HIGH);
+	digitalWrite(outDownPin, HIGH);
+	delay(1000);
+	digitalWrite(outUpPin, LOW);
+	digitalWrite(outDownPin, LOW);
+	Serial.println("Spengo LED");
+	/**FINE TEST LED**/
 }
 
 void loop()
