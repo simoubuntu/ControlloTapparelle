@@ -3,3 +3,20 @@
 ################################################################################
 
 /.vs/ControlloTapparelle/v14/.suo
+/Debug/core.a
+/Debug/ControlloTapparelle.with_bootloader.hex
+/Debug/ControlloTapparelle.ino.with_bootloader.hex
+/Debug/ControlloTapparelle.ino.hex
+/Debug/ControlloTapparelle.ino.elf
+/Debug/ControlloTapparelle.hex
+/Debug/ControlloTapparelle.elf
+/Debug/ControlloTapparelle.cpp.o
+/Debug/ControlloTapparelle.cpp.d
+/Debug/board.buildinfo
+/__vm/Upload.vmps.xml
+/__vm/Configuration.Debug.vmps.xml
+/__vm/Compile.vmps.xml
+/__vm/.ControlloTapparelle.vsarduino.h
+/ControlloTapparelle.vcxproj.filters
+/ControlloTapparelle.vcxproj
+/ControlloTapparelle.sln
