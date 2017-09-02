@@ -8,6 +8,7 @@ int sensor2Val = 0;
 int mean = 0;
 int meanArray[5] = { 0, 0, 0, 0, 0 };
 int counter = 0;
+char tbp[25];
 
 void setup()
 {
@@ -39,6 +40,9 @@ void loop()
 	Serial.print(sensor1Val);
 	Serial.print(" - S2 = ");
 	Serial.println(sensor2Val);
+
+	sprintf(tbp, "%d, %d, %d, %d, %d.", meanArray[0], meanArray[1], meanArray[2], meanArray[3], meanArray[4]);
+	Serial.println(tbp);
 
 	mean = (sensor1Val + sensor2Val) / 2;
 
