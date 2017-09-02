@@ -5,11 +5,14 @@ const int outDownPin = 7;
 
 int sensor1Val = 0;
 int sensor2Val = 0;
-int actMean = 0;
+int currMean = 0;
 int intgMean = 0;
 int meanArray[5] = { 0, 0, 0, 0, 0 };
 int counter = 0;
 char tbp[31];
+unsigned long interval = 6000;
+unsigned long prevTime = 0;
+unsigned long currTime = 0;
 
 void setup()
 {
@@ -32,31 +35,37 @@ void setup()
 
 void loop()
 {
-	sensor1Val = analogRead(sensor1Pin);
-	sensor2Val = analogRead(sensor2Pin);
+	currTime = millis();
 
-	Serial.print(counter);
-	Serial.print(") ");
-	Serial.print("S1 = ");
-	Serial.print(sensor1Val);
-	Serial.print(" - S2 = ");
-	Serial.println(sensor2Val);
+	if (currTime > prevTime + interval) {
+		sensor1Val = analogRead(sensor1Pin);
+		sensor2Val = analogRead(sensor2Pin);
 
-	actMean = (sensor1Val + sensor2Val) / 2;
+		Serial.print(counter);
+		Serial.print(") ");
+		Serial.print("S1 = ");
+		Serial.print(sensor1Val);
+		Serial.print(" - S2 = ");
+		Serial.println(sensor2Val);
 
-	meanArray[counter] = actMean;
+		currMean = (sensor1Val + sensor2Val) / 2;
 
-	intgMean = (meanArray[0] + meanArray[1] + meanArray[2] + meanArray[3] + meanArray[4]) / 5;
+		meanArray[counter] = currMean;
 
-	sprintf(tbp, "%d, %d, %d, %d, %d -> %d", meanArray[0], meanArray[1], meanArray[2], meanArray[3], meanArray[4], intgMean);
-	Serial.println(tbp);
+		intgMean = (meanArray[0] + meanArray[1] + meanArray[2] + meanArray[3] + meanArray[4]) / 5;
 
-	if (counter == 4) {
-		counter = 0;
+		sprintf(tbp, "%d, %d, %d, %d, %d -> %d", meanArray[0], meanArray[1], meanArray[2], meanArray[3], meanArray[4], intgMean);
+		Serial.println(tbp);
+
+		if (counter == 4) {
+			counter = 0;
+		}
+		else {
+			counter++;
+		}
+
+		prevTime = currTime;
 	}
-	else {
-		counter++;
-	}
-
-	delay(1000);
+	
+	
 }
