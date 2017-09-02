@@ -5,10 +5,11 @@ const int outDownPin = 7;
 
 int sensor1Val = 0;
 int sensor2Val = 0;
-int mean = 0;
+int actMean = 0;
+int intgMean = 0;
 int meanArray[5] = { 0, 0, 0, 0, 0 };
 int counter = 0;
-char tbp[25];
+char tbp[31];
 
 void setup()
 {
@@ -41,12 +42,14 @@ void loop()
 	Serial.print(" - S2 = ");
 	Serial.println(sensor2Val);
 
-	sprintf(tbp, "%d, %d, %d, %d, %d.", meanArray[0], meanArray[1], meanArray[2], meanArray[3], meanArray[4]);
+	actMean = (sensor1Val + sensor2Val) / 2;
+
+	meanArray[counter] = actMean;
+
+	intgMean = (meanArray[0] + meanArray[1] + meanArray[2] + meanArray[3] + meanArray[4]) / 5;
+
+	sprintf(tbp, "%d, %d, %d, %d, %d -> %d", meanArray[0], meanArray[1], meanArray[2], meanArray[3], meanArray[4], intgMean);
 	Serial.println(tbp);
-
-	mean = (sensor1Val + sensor2Val) / 2;
-
-	meanArray[counter] = mean;
 
 	if (counter == 4) {
 		counter = 0;
